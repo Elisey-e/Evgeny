@@ -10,13 +10,24 @@
 #include <ctype.h>
 
 
-const size_t end_code = -100; // константа для перехвата окончания файла при его считывании функцией GETLINE
-
-
 /*!
 \file
 \brief Заголовочный файл с описанием библиотечных функций
 */
+
+
+struct{
+    int STRING = 1;
+    int CHAR = 2;
+    int INT = 3;
+    int DOUBLE = 4;
+} TYPE_EL;
+
+
+struct{
+    int data_type = TYPE_EL.STRING;
+    int reverse = false;
+} params;
 
 
 #define ASSERT(cond)\
@@ -37,7 +48,12 @@ const size_t end_code = -100; // константа для перехвата о
     Если *lineptr равно NULL, то процедура getline() будет создавать буфер для содержимого строки, который затем должен быть высвобожден программой пользователя. Как альтернатива, перед вызовом getline(), *lineptr может содержать указатель на буфер, размещенный через malloc() с размером *n байтов. Если буфер недостаточно велик для размещения всей считанной строки, то getline() изменяет размер буфера с помощью realloc(), обновляя *lineptr и *n при необходимости. В любом случае при успехном вызове *lineptr и *n будут обновлены для отражения адреса буфера и его размера соответственно.
 */
 
-int Compare_Strings(const void* el_1, const void* el_2);
+int Compare_Elements(const void* el_1, const void* el_2);
 
+int Compare_Strings(char* str1, char* str2);
+
+int Reversed_Compare_Strings(char* str1, char* str2);
+
+int is_letter(int c);
 
 #endif
