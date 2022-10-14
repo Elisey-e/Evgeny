@@ -3,21 +3,26 @@
 
 /*!
 \file
-\brief Главный файл проекта с функцией main, по умолчанию проверяет корректность работы функций библиотеки
+\brief Главный файл проекта с функцией main
 \authors Zhdanov_EA
 */
 
 int reversed = false;
 
 
+/*!
+	\brief Главная функция проекта.
+
+    <main> производит считывание текста из файла, сортирует его различными способами и методами и записывает результат в папку output проекта
+*/
+
 int main ()
 {
-    params.data_type = TYPE_EL.STRING;
-    params.reverse = false;
+    struct params params_main;
 
     size_t max_len = 35;
-    char* sp_a[6300]  = {};
-    size_t sp_len[6300] = {};
+    char* sp_a[params_main.text_len]  = {};
+    size_t sp_len[params_main.text_len] = {};
     sp_a[0] = (char*) calloc(max_len, sizeof(char));
 
     FILE* f = fopen("input/input.txt", "r");
@@ -34,7 +39,7 @@ int main ()
         fprintf(fwc, sp_a[j]);
     }
     
-    qsort(sp_a, len, sizeof(char*), Compare_Elements);
+    MergeSort(sp_a, len, sizeof(char*));
     FILE* fw = fopen("output/output_sorted.txt", "w");
     for (int j = 0; j < len; j++){
         fprintf(fw, sp_a[j]);
@@ -48,6 +53,5 @@ int main ()
     }
     
     printf("OK\n");
-
     return 0;
 }

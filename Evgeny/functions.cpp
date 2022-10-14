@@ -3,7 +3,7 @@
 
 /*!
 \file
-\brief Исполняемый файл с библиотечными функциями
+\brief Исполняемый файл с функциями, необходимыми при сортировке
 */
 
 
@@ -15,7 +15,11 @@ int is_letter(int c){
 
 int Compare_Elements(const void* el_1, const void* el_2){
     extern int reversed;
-    if (params.data_type == TYPE_EL.STRING){
+    struct params params_main_comp;
+    struct type_el type_el_comp;
+    
+    
+    if (params_main_comp.data_type == type_el_comp.STRING){
         if (reversed == false){
             return Compare_Strings(*(char**)el_1, *(char**)el_2);
         }
@@ -97,4 +101,34 @@ int Reversed_Compare_Strings(char* str1, char* str2){
             --len2;
         }
     }
+}
+
+
+void MergeSortImpl(char** values, char** buffer, int l, int r) {
+    if (l < r) {
+        int m = (l + r) / 2;
+        MergeSortImpl(values, buffer, l, m);
+        MergeSortImpl(values, buffer, m + 1, r);
+
+        int k = l;
+        for (int i = l, j = m + 1; i <= m || j <= r; ) {
+            if (j > r || (i <= m && Compare_Strings(values[i], values[j]) < 0)) {
+                buffer[k] = values[i];
+                ++i;
+            }
+            else {
+                buffer[k] = values[j];
+                ++j;
+            }
+            ++k;
+        }
+        for (int i = l; i <= r; ++i) {
+            values[i] = buffer[i];
+        }
+    }
+}
+
+void MergeSort(char** sp, int len, int size_of_el) {
+    char* buffer[len] = {};
+    MergeSortImpl(sp, buffer, 0, len - 1);
 }
