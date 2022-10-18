@@ -1,0 +1,113 @@
+\hypertarget{functions_8cpp}{}\doxysection{functions.\+cpp File Reference}
+\label{functions_8cpp}\index{functions.cpp@{functions.cpp}}
+
+
+Исполняемый файл с функциями, необходимыми при сортировке  
+
+
+{\ttfamily \#include \char`\"{}functions.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{functions_8cpp_a0a08e827eaaa82d3f550794f06584c7b}{Compare\+\_\+\+Elements}} (void $\ast$el\+\_\+1, void $\ast$el\+\_\+2, bool reverse)
+\begin{DoxyCompactList}\small\item\em Функция, сравнивающая элементы различных типов. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{functions_8cpp_a11b8be63359e71d07365ffaf5b2a17d1}{Compare\+\_\+\+Strings}} (char $\ast$str1, char $\ast$str2)
+\begin{DoxyCompactList}\small\item\em Функция, сравнивающая строки. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{functions_8cpp_acfff115f150e05cc7d2c2c5539cd661f}{Reversed\+\_\+\+Compare\+\_\+\+Strings}} (char $\ast$str1, char $\ast$str2)
+\begin{DoxyCompactList}\small\item\em Функция, сравнивающая строки с конца. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{functions_8cpp_a2236475da2414e4a61982df5a2e13179}\label{functions_8cpp_a2236475da2414e4a61982df5a2e13179}} 
+void {\bfseries Merge\+Sort\+Impl} (void $\ast$$\ast$values, void $\ast$$\ast$buffer, int l, int r, int($\ast$comp)(void $\ast$, void $\ast$, bool), bool reverse)
+\item 
+\mbox{\Hypertarget{functions_8cpp_ab022dc6f177c5fdf02bb7992d9ff7ac5}\label{functions_8cpp_ab022dc6f177c5fdf02bb7992d9ff7ac5}} 
+void {\bfseries Merge\+Sort} (void $\ast$$\ast$sp, int len, int($\ast$comp)(void $\ast$, void $\ast$, bool), bool reverse)
+\item 
+void \mbox{\hyperlink{functions_8cpp_a4a276130522b11f390e8ca538c8a9728}{Write\+List\+To\+File}} (FILE $\ast$file, char $\ast$$\ast$sp, int len)
+\begin{DoxyCompactList}\small\item\em Запись в файл. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Исполняемый файл с функциями, необходимыми при сортировке 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{functions_8cpp_a0a08e827eaaa82d3f550794f06584c7b}\label{functions_8cpp_a0a08e827eaaa82d3f550794f06584c7b}} 
+\index{functions.cpp@{functions.cpp}!Compare\_Elements@{Compare\_Elements}}
+\index{Compare\_Elements@{Compare\_Elements}!functions.cpp@{functions.cpp}}
+\doxysubsubsection{\texorpdfstring{Compare\_Elements()}{Compare\_Elements()}}
+{\footnotesize\ttfamily int Compare\+\_\+\+Elements (\begin{DoxyParamCaption}\item[{void $\ast$}]{el\+\_\+1,  }\item[{void $\ast$}]{el\+\_\+2,  }\item[{bool}]{reverse }\end{DoxyParamCaption})}
+
+
+
+Функция, сравнивающая элементы различных типов. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em el1} & Указатель на первый элемент. \\
+\hline
+\mbox{\texttt{ in}}  & {\em el2} & Указатель на второй элемент. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 если первый элемент больше, -\/1 если второй элемент больше, 0 если элементы равны.
+\end{DoxyReturn}
+Функция распределяет сравнение 2-\/х объектов заранее известного типа в множество функций, отвечающих за сравнение элементов фиксированного типа. \mbox{\Hypertarget{functions_8cpp_a11b8be63359e71d07365ffaf5b2a17d1}\label{functions_8cpp_a11b8be63359e71d07365ffaf5b2a17d1}} 
+\index{functions.cpp@{functions.cpp}!Compare\_Strings@{Compare\_Strings}}
+\index{Compare\_Strings@{Compare\_Strings}!functions.cpp@{functions.cpp}}
+\doxysubsubsection{\texorpdfstring{Compare\_Strings()}{Compare\_Strings()}}
+{\footnotesize\ttfamily int Compare\+\_\+\+Strings (\begin{DoxyParamCaption}\item[{char $\ast$}]{str1,  }\item[{char $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+
+
+Функция, сравнивающая строки. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em str1} & Указатель на первый элемент. \\
+\hline
+\mbox{\texttt{ in}}  & {\em str2} & Указатель на второй элемент. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 если первый элемент больше, -\/1 если второй элемент больше, 0 если элементы равны.
+\end{DoxyReturn}
+Функция использует для проверки на принадлежность буквам функцию $<$is\+\_\+letter$>$. \mbox{\Hypertarget{functions_8cpp_acfff115f150e05cc7d2c2c5539cd661f}\label{functions_8cpp_acfff115f150e05cc7d2c2c5539cd661f}} 
+\index{functions.cpp@{functions.cpp}!Reversed\_Compare\_Strings@{Reversed\_Compare\_Strings}}
+\index{Reversed\_Compare\_Strings@{Reversed\_Compare\_Strings}!functions.cpp@{functions.cpp}}
+\doxysubsubsection{\texorpdfstring{Reversed\_Compare\_Strings()}{Reversed\_Compare\_Strings()}}
+{\footnotesize\ttfamily int Reversed\+\_\+\+Compare\+\_\+\+Strings (\begin{DoxyParamCaption}\item[{char $\ast$}]{str1,  }\item[{char $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+
+
+Функция, сравнивающая строки с конца. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em str1} & Указатель на первый элемент. \\
+\hline
+\mbox{\texttt{ in}}  & {\em str2} & Указатель на второй элемент. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 если первый элемент больше, -\/1 если второй элемент больше, 0 если элементы равны.
+\end{DoxyReturn}
+Функция использует для проверки на принадлежность буквам функцию $<$is\+\_\+letter$>$. Сравнивая строки с конца, мы получаем словарь рифм. \mbox{\Hypertarget{functions_8cpp_a4a276130522b11f390e8ca538c8a9728}\label{functions_8cpp_a4a276130522b11f390e8ca538c8a9728}} 
+\index{functions.cpp@{functions.cpp}!WriteListToFile@{WriteListToFile}}
+\index{WriteListToFile@{WriteListToFile}!functions.cpp@{functions.cpp}}
+\doxysubsubsection{\texorpdfstring{WriteListToFile()}{WriteListToFile()}}
+{\footnotesize\ttfamily void Write\+List\+To\+File (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file,  }\item[{char $\ast$$\ast$}]{sp,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+Запись в файл. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em file} & Указатель на файл. \\
+\hline
+\mbox{\texttt{ in}}  & {\em sp} & Указатель на массив указателей. \\
+\hline
+\mbox{\texttt{ in}}  & {\em len} & Длина массива.\\
+\hline
+\end{DoxyParams}
+Функция, производящая запись элементов массива в файл. 

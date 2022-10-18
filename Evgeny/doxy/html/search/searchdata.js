@@ -1,10 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "acfimprt",
-  1: "pt",
+  0: "acfgmprtw",
+  1: "p",
   2: "af",
-  3: "cimr",
-  4: "pt"
+  3: "cgmrw",
+  4: "t",
+  5: "t"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "typedefs"
+  4: "enums",
+  5: "defines"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Classes",
   2: "Files",
   3: "Functions",
-  4: "Typedefs"
+  4: "Enumerations",
+  5: "Macros"
 };
 

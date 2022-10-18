@@ -1,5 +1,5 @@
-#ifndef SQUARESOLVER_H
-#define SQUARESOLVER_H
+#ifndef EVGENY_H
+#define EVGENY_H
 
 
 #include <assert.h>
@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 
 #define ASSERT(cond)\
     do {            \
@@ -26,25 +27,30 @@
 	Структура, содержащая констатны, отвечающие за тип обрабатываемых данных.
 */
 
-typedef struct type_el{
-    int STRING = 1;
-    int CHAR = 2;
-    int INT = 3;
-    int DOUBLE = 4;
-} TYPE_EL;
-
+enum TYPE_EL
+{
+    STRING = 0,
+    CHAR   = 1,
+    INT    = 2,
+    DOUBLE = 3,
+};
 
 /*!
 	Структура, содержащая констатны, отвечающие за варианты обработки данных.
 */
 
+#define TEXT_LEN_DEFAULT 6800
+#define STRINGS_COMPARE_ERROR -666
+
 typedef struct params{
-    struct type_el el_all;
-    int data_type = el_all.STRING;
+    int data_type = STRING;
     int reverse = false;
-    int text_len = 6300;
+    int text_len = TEXT_LEN_DEFAULT;
+    int comp_err = STRINGS_COMPARE_ERROR;
 } PARAMS;
 
+#undef STRINGS_COMPARE_ERROR
+#undef TEXT_LEN_DEFAULT
 
 /*!
 	\brief Функция, сравнивающая элементы различных типов.
@@ -55,7 +61,7 @@ typedef struct params{
     Функция распределяет сравнение 2-х объектов заранее известного типа в множество функций, отвечающих за сравнение элементов фиксированного типа.
 */
 
-int Compare_Elements(const void* el_1, const void* el_2);
+int Compare_Elements(void* el_1, void* el_2, bool reverse);
 
 
 /*!
@@ -90,20 +96,7 @@ int Reversed_Compare_Strings(char* str1, char* str2);
     Функция использует для проверки на принадлежность буквам функцию <is_letter>. Сравнивая строки с конца, мы получаем словарь рифм.
 */
 
-int is_letter(int c);
-
-
-/*!
-	\brief Сортировка слиянием.
-	\param[in] values Массив указателей.
-    \param[in] buffer Буфер для хранения подмассивов.
-    \param[in] l Левая граница сортировки.
-    \param[in] r правая граница сортировки.
-
-    Функция реккурентная, поэтому она вынесена отдельно от инициализации сортировки.
-*/
-
-void MergeSortImpl(char** values, char** buffer, int l, int r);
+void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void * v, void * q, bool reverse), bool reverse);
 
 
 /*!
@@ -115,6 +108,50 @@ void MergeSortImpl(char** values, char** buffer, int l, int r);
     Инициализатор реккурентной сортировки.
 */
 
-void MergeSort(char** sp, int len, int size_of_el);
+void MergeSort(void** sp, int len, int (*comp) (void * k, void * m, bool reverse), bool reverse);
+
+
+/*!
+	\brief Запись в файл.
+	\param[in] file Указатель на файл.
+    \param[in] sp Указатель на массив указателей.
+    \param[in] len Длина массива.
+
+    Функция, производящая запись элементов массива в файл.
+*/
+
+void WriteListToFile(FILE* file, char** sp, int len);
+
+
+/*!
+	\brief Чтение из файла.
+    \param[in] sp_a Указатель на массив указателей.
+    \param[in] max_len Длина.
+
+    Функция, производящая чтение элементов из файла в массив.
+*/
+
+int read(char** sp_a, size_t max_len);
+
+
+/*!
+	\brief Запись в файл.
+    \param[in] sp_a Указатель на массив указателей.
+    \param[in] max_len Длина.
+
+    Функция, производящая необходимую сортировку и записывающую результат в файлы.
+*/
+
+int write(char** sp_a, int len);
+
+
+/*!
+	\brief Чтение из файла.
+
+    Функция, выделяющая память и создающая необходимые переменные.
+*/
+
+char** generate();
+
 
 #endif
