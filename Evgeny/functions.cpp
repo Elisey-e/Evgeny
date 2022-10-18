@@ -146,6 +146,7 @@ void MergeSort(void** sp, int len, int (*comp) (void *, void *, bool), bool reve
     assert(comp != NULL);
 
     void** buffer = (void**) calloc(len, sizeof(void*));
+    assert(buffer != NULL);
 
     MergeSortImpl(sp, buffer, 0, len - 1, comp, reverse);
 }

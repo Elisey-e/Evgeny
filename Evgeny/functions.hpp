@@ -131,7 +131,7 @@ void WriteListToFile(FILE* file, char** sp, int len);
     Функция, производящая чтение элементов из файла в массив.
 */
 
-int read(char** sp_a, size_t max_len);
+int read(char** sp_a, size_t max_len, int* len);
 
 
 /*!

@@ -20,7 +20,8 @@ int main ()
     char** sp_a = generate();
 
     size_t max_len = 35;
-    int len = read(sp_a, max_len);
+    int len = 0;
+    read(sp_a, max_len, &len);
 
     write(sp_a, len);
     
@@ -39,19 +40,19 @@ char** generate(){
 }
 
 
-int read(char** sp_a, size_t max_len){
+int read(char** sp_a, size_t max_len, int* len_main){
     FILE*  f = fopen("input/input.txt", "r");
     assert(f != NULL);
     assert(sp_a != NULL);
 
-    int len = 0;
     sp_a[0] = (char*) calloc(max_len, sizeof(char));
-    while (getline(&sp_a[len], &max_len, f) != -1){
-        ++len;
-        sp_a  [len] = (char*) calloc(max_len, sizeof(char));
+    while (getline(&sp_a[*len_main], &max_len, f) != -1){
+        assert(sp_a[*len_main] != NULL);
+        ++*len_main;
+        sp_a[*len_main] = (char*) calloc(max_len, sizeof(char));
     }
 
-    return len;
+    return 0;
 }
 
 
