@@ -27,7 +27,11 @@ int Compare_Elements(void* el_1, void* el_2, bool reverse){
 }
 
 
-int Compare_Strings(char* str1, char* str2){
+int Compare_Strings(void* el1_in, void* el2_in){
+    assert(el1_in != NULL);
+    assert(el2_in != NULL);
+    char* str1 = (char*) el1_in;
+    char* str2 = (char*) el2_in;
     struct params params_main_comp = {};
     assert(str1 != NULL);
     assert(str2 != NULL);
@@ -69,7 +73,11 @@ int Compare_Strings(char* str1, char* str2){
 }
 
 
-int Reversed_Compare_Strings(char* str1, char* str2){
+int Reversed_Compare_Strings(void* el1_in, void* el2_in){
+    assert(el1_in != NULL);
+    assert(el2_in != NULL);
+    char* str1 = (char*) el1_in;
+    char* str2 = (char*) el2_in;
     struct params params_main_comp = {};
     assert(str1 != NULL);
     assert(str2 != NULL);
@@ -112,19 +120,19 @@ int Reversed_Compare_Strings(char* str1, char* str2){
 }
 
 
-void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void *, void *, bool), bool reverse) {
+void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void *, void *)) {
     assert(values != NULL);
     assert(buffer != NULL);
     assert(comp != NULL);
 
     if (l < r) {
         int m = (l + r) / 2;
-        MergeSortImpl(values, buffer, l, m, comp, reverse);
-        MergeSortImpl(values, buffer, m + 1, r, comp, reverse);
+        MergeSortImpl(values, buffer, l, m, comp);
+        MergeSortImpl(values, buffer, m + 1, r, comp);
 
         int k = l;
         for (int i = l, j = m + 1; i <= m || j <= r; ) {
-            if (j > r || (i <= m && comp(values[i], values[j], reverse) < 0)) {
+            if (j > r || (i <= m && comp(values[i], values[j]) < 0)) {
                 buffer[k] = values[i];
                 ++i;
             }
@@ -141,14 +149,14 @@ void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void
 }
 
 
-void MergeSort(void** sp, int len, int (*comp) (void *, void *, bool), bool reverse) {
+void MergeSort(void** sp, int len, int (*comp) (void *, void *)) {
     assert(sp != NULL);
     assert(comp != NULL);
 
     void** buffer = (void**) calloc(len, sizeof(void*));
     assert(buffer != NULL);
 
-    MergeSortImpl(sp, buffer, 0, len - 1, comp, reverse);
+    MergeSortImpl(sp, buffer, 0, len - 1, comp);
 }
 
 

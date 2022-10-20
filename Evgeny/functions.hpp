@@ -73,7 +73,7 @@ int Compare_Elements(void* el_1, void* el_2, bool reverse);
     Функция использует для проверки на принадлежность буквам функцию <is_letter>. 
 */
 
-int Compare_Strings(char* str1, char* str2);
+int Compare_Strings(void* el1_in, void* el2_in);
 
 
 /*!
@@ -85,7 +85,7 @@ int Compare_Strings(char* str1, char* str2);
     Функция использует для проверки на принадлежность буквам функцию <is_letter>. Сравнивая строки с конца, мы получаем словарь рифм.
 */
 
-int Reversed_Compare_Strings(char* str1, char* str2);
+int Reversed_Compare_Strings(void* el1_in, void* el2_in);
 
 
 /*!
@@ -96,7 +96,7 @@ int Reversed_Compare_Strings(char* str1, char* str2);
     Функция использует для проверки на принадлежность буквам функцию <is_letter>. Сравнивая строки с конца, мы получаем словарь рифм.
 */
 
-void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void * v, void * q, bool reverse), bool reverse);
+void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void * v, void * q));
 
 
 /*!
@@ -108,7 +108,7 @@ void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void
     Инициализатор реккурентной сортировки.
 */
 
-void MergeSort(void** sp, int len, int (*comp) (void * k, void * m, bool reverse), bool reverse);
+void MergeSort(void** sp, int len, int (*comp) (void * k, void * m));
 
 
 /*!
@@ -125,24 +125,24 @@ void WriteListToFile(FILE* file, char** sp, int len);
 
 /*!
 	\brief Чтение из файла.
-    \param[in] sp_a Указатель на массив указателей.
+    \param[in] sp_all Указатель на массив указателей.
     \param[in] max_len Длина.
 
     Функция, производящая чтение элементов из файла в массив.
 */
 
-int read(char** sp_a, size_t max_len, int* len);
+int read(char** sp_all, size_t max_len, int* len);
 
 
 /*!
-	\brief Запись в файл.
-    \param[in] sp_a Указатель на массив указателей.
+	\brief Сортировка.
+    \param[in] sp_all Указатель на массив указателей.
     \param[in] max_len Длина.
 
-    Функция, производящая необходимую сортировку и записывающую результат в файлы.
+    Функция, производящая необходимую сортировку.
 */
 
-int write(char** sp_a, int len);
+int different_sorting(char** sp_all, int len);
 
 
 /*!

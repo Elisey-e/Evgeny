@@ -17,13 +17,13 @@
 
 int main ()
 {
-    char** sp_a = generate();
+    char** sp_all = generate();
 
     size_t max_len = 35;
     int len = 0;
-    read(sp_a, max_len, &len);
+    read(sp_all, max_len, &len);
 
-    write(sp_a, len);
+    different_sorting(sp_all, len);
     
     printf("OK\n");
     return 0;
@@ -33,40 +33,44 @@ int main ()
 char** generate(){
     struct params params_main = {};
 
-    char**  sp_a = (char**) calloc(params_main.text_len, sizeof(char*));;
-    assert(sp_a != NULL);
+    char** sp_all = (char**) calloc(params_main.text_len, sizeof(char*));;
+    assert(sp_all != NULL);
 
-    return sp_a;
+    return sp_all;
 }
 
 
-int read(char** sp_a, size_t max_len, int* len_main){
-    FILE*  f = fopen("input/input.txt", "r");
-    assert(f != NULL);
-    assert(sp_a != NULL);
+int read(char** sp_all, size_t max_len, int* len_main){
+    FILE*  fread = fopen("input/input.txt", "r");
+    assert(fread != NULL);
+    assert(sp_all != NULL);
 
-    sp_a[0] = (char*) calloc(max_len, sizeof(char));
-    while (getline(&sp_a[*len_main], &max_len, f) != -1){
-        assert(sp_a[*len_main] != NULL);
+    sp_all[0] = (char*) calloc(max_len, sizeof(char));
+    while (getline(&sp_all[*len_main], &max_len, fread) != -1){
+        assert(sp_all[*len_main] != NULL);
         ++*len_main;
-        sp_a[*len_main] = (char*) calloc(max_len, sizeof(char));
+        sp_all[*len_main] = (char*) calloc(max_len, sizeof(char));
     }
+    fclose(fread);
 
     return 0;
 }
 
 
-int write(char** sp_a, int len){
+int different_sorting(char** sp_all, int len){
     FILE*  fwc = fopen("output/output_canon.txt", "w");
-    WriteListToFile(fwc, sp_a, len);
+    WriteListToFile(fwc, sp_all, len);
+    fclose(fwc);
     
-    MergeSort((void **)sp_a, len, Compare_Elements, false);
-    FILE* fw = fopen("output/output_sorted.txt", "w");
-    WriteListToFile(fw, sp_a, len);
+    MergeSort((void **)sp_all, len, Compare_Strings);
+    FILE* fws = fopen("output/output_sorted.txt", "w");
+    WriteListToFile(fws, sp_all, len);
+    fclose(fws);
 
-    MergeSort((void **)sp_a, len, Compare_Elements, true);
+    MergeSort((void **)sp_all, len, Reversed_Compare_Strings);
     FILE* fwr = fopen("output/output_sorted_reversed.txt", "w");
-    WriteListToFile(fwr, sp_a, len);
+    WriteListToFile(fwr, sp_all, len);
+    fclose(fwr);
 
     return 0;
 }
