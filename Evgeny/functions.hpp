@@ -12,8 +12,9 @@
 
 #define ASSERT(cond)\
     do {            \
-	    if (!(cond))\
+	    if (!(cond)){\
 		    printf("\tError in line %d\n\tof the file %s\n\tcondinion (%s) is false\n", __LINE__, __FILE__, #cond);\
+            exit(1);}\
     } while(0)
 
 

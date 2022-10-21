@@ -125,6 +125,8 @@ void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void
     assert(buffer != NULL);
     assert(comp != NULL);
 
+    ASSERT(comp != NULL);
+
     if (l < r) {
         int m = (l + r) / 2;
         MergeSortImpl(values, buffer, l, m, comp);
@@ -152,6 +154,8 @@ void MergeSortImpl(void** values, void** buffer, int l, int r, int (*comp) (void
 void MergeSort(void** sp, int len, int (*comp) (void *, void *)) {
     assert(sp != NULL);
     assert(comp != NULL);
+
+    ASSERT(sp != NULL);
 
     void** buffer = (void**) calloc(len, sizeof(void*));
     assert(buffer != NULL);
